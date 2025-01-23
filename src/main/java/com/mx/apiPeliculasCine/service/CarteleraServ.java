@@ -15,5 +15,7 @@ public interface CarteleraServ {
 	public void editar(Cartelera cartelera);
 	
 	public void eliminarXid(int idCart);
+	
+	 public List<Cartelera> buscarXnombre(String nombre);
 
 }

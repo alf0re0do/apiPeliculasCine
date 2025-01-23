@@ -35,7 +35,7 @@ public class Cartelera {
 	private String genero;
 	
 	@Column(name = "PRECIO", columnDefinition = "NUMBER", nullable = true)
-	private Integer precio;
+	private Float precio;
 	
 	//Los tipos de datos primitivos de preferencia hay que parsearlos
 	//Un tipo de datos primitivo que no esta parseado no recibe valores nulos

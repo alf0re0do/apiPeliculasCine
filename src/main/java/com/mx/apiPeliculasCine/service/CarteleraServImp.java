@@ -15,41 +15,52 @@ import com.mx.apiPeliculasCine.model.Cartelera;
 @Service
 
 public class CarteleraServImp implements CarteleraServ {
-	
-	/*Realizamos una inyeccion de dependicia
-	 * @Autowired----Nos permite tener un mejor control de los objetos que se inicializan*/
+
+	/*
+	 * Realizamos una inyeccion de dependicia 
+	 * @Autowired----Nos permite tener un mejor control de los objetos que se
+	 * inicializan
+	 */
 
 	@Autowired
 	CarteleraDao dao;
+
 	@Override
 	public void guardar(Cartelera cartelera) {
-		
 		dao.save(cartelera);
-		
 	}
-
+	@Transactional(readOnly = true)
 	@Override
 	public List<Cartelera> listar() {
-		// TODO Auto-generated method stub
 		return (List<Cartelera>) dao.findAll();
 	}
-	@Transactional(readOnly = true)//Se agrega cuando no vamos a realizar cambios en la base de datos
+
+	@Transactional(readOnly = true) // Se agrega cuando no vamos a realizar cambios en la base de datos
 	@Override
 	public Cartelera buscarXid(int idCartel) {
-		
-		return null;
+		Cartelera cartelera = dao.findById(idCartel).orElse(null);
+		return cartelera;
 	}
-
+	@Transactional
 	@Override
 	public void editar(Cartelera cartelera) {
-		// TODO Auto-generated method stub
-		
-	}
+		dao.save(cartelera);
 
+	}
+	@Transactional
 	@Override
 	public void eliminarXid(int idCart) {
-		// TODO Auto-generated method stub
+	
+	    dao.deleteById(idCart);
+
+	}
+	
+	@Transactional(readOnly = true)
+	@Override
+	public List<Cartelera> buscarXnombre(String nombre) {
 		
+		return (List<Cartelera>)dao.findByNombre(nombre);
+		 
 	}
 
 }
